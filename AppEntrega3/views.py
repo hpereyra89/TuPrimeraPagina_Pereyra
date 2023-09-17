@@ -37,8 +37,11 @@ def clientes(request):
             {"form": forms.clientesFormulario()}
         )
     else:
-        modelo = models.Clientes(nombre=request.POST["nombre"], apellido=request.POST["apellido"],email=request.POST["email"])
-        modelo.save()
+        formulario = forms.clientesFormulario(request.POST)
+        if formulario.is_valid():
+            informacion = formulario.cleaned_data
+            modelo = models.Clientes(nombre=informacion["nombre"], apellido=informacion["apellido"],email=informacion["email"])
+            modelo.save()
         return render(
             request,
             'AppEntrega3/clientes.html',
@@ -53,8 +56,11 @@ def vendedores(request):
             {"form": forms.vendedoresFormulario()}
         )
     else:
-        modelo = models.Vendedores(nombre=request.POST["nombre"], apellido=request.POST["apellido"],email=request.POST["email"])
-        modelo.save()
+        formulario = forms.vendedoresFormulario(request.POST)
+        if formulario.is_valid():
+            informacion = formulario.cleaned_data
+            modelo = models.Vendedores(nombre=informacion["nombre"], apellido=informacion["apellido"],email=informacion["email"])
+            modelo.save()
         return render(
             request,
             'AppEntrega3/vendedores.html',
@@ -70,8 +76,11 @@ def productos(request):
             {"form": forms.productosFormulario()}
         )
     else:
-        modelo = models.Productos(marca=request.POST["marca"], modelo=request.POST["modelo"],sku=request.POST["sku"])
-        modelo.save()
+        formulario = forms.productosFormulario(request.POST)
+        if formulario.is_valid():
+            informacion = formulario.cleaned_data
+            modelo = models.Productos(marca=informacion["marca"], modelo=informacion["modelo"],sku=informacion["sku"])
+            modelo.save()
         return render(
             request,
             'AppEntrega3/productos.html',
@@ -87,8 +96,11 @@ def ventas(request):
             {"form": forms.ventasFormulario()}
         )
     else:
-        modelo = models.Ventas(numeroVenta=request.POST["numeroVenta"], fecha=request.POST["fecha"],vendedor=request.POST["vendedor"],cliente=request.POST["cliente"])
-        modelo.save()
+        formulario = forms.ventasFormulario(request.POST)
+        if formulario.is_valid():
+            informacion = formulario.cleaned_data
+            modelo = models.Ventas(numeroVenta=informacion["numeroVenta"], fecha=informacion["fecha"],vendedor=informacion["vendedor"],cliente=informacion["cliente"])
+            modelo.save()
         return render(
             request,
             'AppEntrega3/ventas.html',
